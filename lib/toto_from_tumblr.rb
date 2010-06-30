@@ -32,17 +32,17 @@ class TotoFromTumblr
   # creates a valid toto blog entry object
   def to_toto
     @xml_part = xml_part unless @xml_part #feeling dizzy reading this...
-    toto_article = TotoArticle.new
     #extracted necessary info
     post = @xml_part.search('//post')
     if post #FIXME handle npes (y-combinator?)
-      toto_article.title = post.search('regular-title').children
-      toto_article.body = CGI::unescapeHTML(post.search('regular-body').children[0].to_s)
-      post.search('tag').children.each {|tag| toto_article.tags << tag }
-      toto_article.slug = "" #TODO find out how to get the key value pairs in the xml tag!
-      toto_article.date = ""
+      title = post.search('regular-title').children.to_s
+      body = CGI::unescapeHTML(post.search('regular-body').children[0].to_s)
+      tags = Array.new
+      post.search('tag').children.each {|tag| tags << tag.to_s }
+      slug = "" #TODO find out how to get the key value pairs in the xml tag!
+      date = ""
     end
-    toto_article
+    TotoArticle.new(title, body, date, tags, slug)
   end
 
 

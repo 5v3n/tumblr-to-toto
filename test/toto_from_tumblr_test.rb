@@ -36,7 +36,7 @@ class TotoFromTumblrTest < Test::Unit::TestCase
     converter = TotoFromTumblr.new(FILENAME)
     toto = converter.to_toto
     puts toto.inspect
-    puts toto.to_s
+    puts toto
   end
 
 end

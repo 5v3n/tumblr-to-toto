@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'toto_article'
 
 class TotoFromTumblr
-  attr_accessor :file_content, :filename, :xml_part
+  attr_accessor :file_content, :filename, :xml_part, :article
   def initialize(filename=nil)
     @filename = filename
     @file_content = ""
@@ -41,7 +41,27 @@ class TotoFromTumblr
       slug = post['slug'] 
       date = post['date']
     end
-    TotoArticle.new(title, body, date, tags, slug)
+    @article = TotoArticle.new(title, body, date, tags, slug)
+  end
+  def to_file(article_file_name=nil, article_file_path="./")
+    self.to_toto
+    date = Time.new
+    path = File.join(article_file_path, date.strftime("%Y%m%d%H%M"))
+    FileUtils.makedirs(path)
+    if article_file_name
+      name = article_file_name
+    else
+      name=@article.file_name
+    end
+    File.open(File.join(path, name), 'w') { |file|  
+      #file.makedirs(path)
+      file.puts @article.to_s }
+  end
+  def from_dir(directory="./")
+    Dir[File.join(directory, "*")].each do |file|
+      converter = TotoFromTumblr.new(file)
+      converter.to_file()
+    end
   end
 
 

@@ -1,7 +1,7 @@
 require 'cgi'
 
 class TotoArticle
-  attr_accessor :title, :body, :tags, :slug, :date, :extension
+  attr_accessor :title, :body, :tags, :slug, :date, :extension, :file_name
   # instantiate the article. Left out optional parameters are generated, e.g. <code>date</code> with the current date etc.
   def initialize(title, body, date, tags=Array.new, slug=nil, file_extension="txt" )
     @title = title
@@ -19,11 +19,11 @@ class TotoArticle
   def to_s
     toto_post = ""
     toto_post << "title: #{@title}\n"
-    toto_post << "date: #{@date.strftime("%Y-%m-%d")}\n"
+    toto_post << "date: #{@date.strftime("%Y\/%m\/%d")}\n"
     if @tags
     toto_post << "tags: "
     @tags.each {|tag| toto_post << "#{tag}, "}
-    toto_post.chop!.chop! #yeah, take this unnecessary ", "!
+    toto_post.chop!.chop! #yeah, take this, unnecessary ", "!
     toto_post << "\n"
     end
     toto_post << "slug: #{@slug}" unless @slug==""

@@ -30,8 +30,18 @@ class TotoFromTumblrTest < Test::Unit::TestCase
     assert("No post slug extratced! ", toto.slug)
     assert("No post title extratced! ", toto.title)
     assert("No post tag(s) extracted!", toto.tags)
-
     puts toto
+  end
+  def test_to_file
+       converter = TotoFromTumblr.new(FILENAME)
+       converter.to_file
+       flunk "add assertion!"
+       #FIXME add assertion
+  end
+  def test_from_dir
+     converter = TotoFromTumblr.new(FILENAME)
+     converter.from_dir("./test/tumblrExamples")
+
   end
 
 end

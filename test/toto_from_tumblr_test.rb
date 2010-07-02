@@ -33,15 +33,14 @@ class TotoFromTumblrTest < Test::Unit::TestCase
     puts toto
   end
   def test_to_file
-       converter = TotoFromTumblr.new(FILENAME)
-       converter.to_file
-       flunk "add assertion!"
-       #FIXME add assertion
+    converter = TotoFromTumblr.new(FILENAME)
+    converter.to_file
+    flunk "add assertions!"
   end
   def test_from_dir
-     converter = TotoFromTumblr.new(FILENAME)
-     converter.from_dir("./test/tumblrExamples")
-
+    converter = TotoFromTumblr.new(FILENAME)
+    converter.from_dir("./test/tumblrExamples")
+    flunk "add assertions!"
   end
 
 end

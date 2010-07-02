@@ -1,9 +1,9 @@
 require 'cgi'
 
 class TotoArticle
-  attr_accessor :title, :body, :tags, :slug, :date, :extension, :file_name
+  attr_accessor :title, :body, :tags, :slug, :date, :extension, :file_name, :type
   # instantiate the article. Left out optional parameters are generated, e.g. <code>date</code> with the current date etc.
-  def initialize(title, body, date, tags=Array.new, slug=nil, file_extension="txt" )
+  def initialize(title, body, date, tags=Array.new, slug=nil, type=nil, file_extension="txt" )
     @title = title
     @body = body
     @tags = tags
@@ -13,6 +13,7 @@ class TotoArticle
       @slug = CGI::escape(@title) #TODO test, does this actually work as a url?
     end
     @date = Time.parse(date)
+    @type = type
     @file_extension = file_extension
     @file_name = "#{@date.strftime("%Y-%m-%d")}-#{@slug}.#{@file_extension}" 
   end

@@ -40,13 +40,14 @@ class TotoFromTumblr
       post.search('tag').children.each {|tag| tags << tag.to_s }
       slug = post['slug'] 
       date = post['date']
+      type = post['type']
     end
-    @article = TotoArticle.new(title, body, date, tags, slug)
+    @article = TotoArticle.new(title, body, date, tags, slug, type)
   end
   def to_file(article_file_name=nil, article_file_path="./")
     self.to_toto
     date = Time.new
-    path = File.join(article_file_path, date.strftime("%Y%m%d%H%M"))
+    path = File.join(article_file_path, date.strftime("%Y%m%d%H%M"), @article.type)
     FileUtils.makedirs(path)
     if article_file_name
       name = article_file_name

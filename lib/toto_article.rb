@@ -19,12 +19,17 @@ class TotoArticle
   end
   def to_s
     toto_post = ""
-    toto_post << "title: #{@title}\n"
+    if @title.index(":") #yaml couldn't cope with ':', so we'l escape it
+      post_title = @title.gsub!(":", "&#58;")
+    else
+      post_title = @title
+    end
+    toto_post << "title: #{post_title}\n"
     toto_post << "date: #{@date.strftime("%Y\/%m\/%d")}\n"
-    if @tags
+    if @tags && !@tags.empty?
     toto_post << "tags: "
     @tags.each {|tag| toto_post << "#{tag}, "}
-    toto_post.chop!.chop! #yeah, take this, unnecessary ", "!
+    toto_post.chop!.chop!  #yeah, take this, unnecessary ", " at the end !
     toto_post << "\n"
     end
     toto_post << "slug: #{@slug}" unless @slug==""

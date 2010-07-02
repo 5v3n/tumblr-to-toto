@@ -52,7 +52,7 @@ class TotoFromTumblr
     if article_file_name
       name = article_file_name
     else
-      name=@article.file_name
+        name=@article.file_name
     end
     File.open(File.join(path, name), 'w') { |file|  
       #file.makedirs(path)

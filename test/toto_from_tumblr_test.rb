@@ -19,23 +19,18 @@ class TotoFromTumblrTest < Test::Unit::TestCase
   end
   def test_extract_xml_part
     converter = TotoFromTumblr.new(FILENAME)
-    xml_part = converter.xml_part
-    
-    post = xml_part.search('//post')
-    post_title = xml_part.search('//post').search('regular-title').children
-    post_body = xml_part.search('//post').search('regular-body').children
-    post_tags = xml_part.search('//post').search('tag')
-
-    assert("Nothing extracted at all...", xml_part)
-    assert("No post extratced!", post)
-    assert("No post body extratced! ", post_body)
-    assert("No post title extratced! ", post_title)
-    assert("No post tag(s) extracted!", post_tags)
-  end
+    xml_part = converter.xml_part  
+    assert("No xml part extracted...", xml_part)
+    end
   def test_to_toto
     converter = TotoFromTumblr.new(FILENAME)
     toto = converter.to_toto
-    puts toto.inspect
+    assert("No post body extratced! ", toto.body)
+    assert("No post date extratced! ", toto.date)
+    assert("No post slug extratced! ", toto.slug)
+    assert("No post title extratced! ", toto.title)
+    assert("No post tag(s) extracted!", toto.tags)
+
     puts toto
   end
 

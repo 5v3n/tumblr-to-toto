@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'toto_article'
 
 class TotoFromTumblr
-  attr_accessor :file_content, :filename
+  attr_accessor :file_content, :filename, :xml_part
   def initialize(filename=nil)
     @filename = filename
     @file_content = ""
@@ -23,7 +23,6 @@ class TotoFromTumblr
   def xml_part
     #TODO think about using nokogiri for loading the file, like:
     #doc = Nokogiri::XML::Document.parse(@file_content) 
-    #doc.search('//h1') 
     start_index = @file_content.index(%{<?xml version="1.0" encoding="UTF-8"?>})
     end_index = @file_content.index(%{END TUMBLR XML -->})
     @xml_part = @file_content.slice(start_index, end_index)
@@ -33,14 +32,14 @@ class TotoFromTumblr
   def to_toto
     @xml_part = xml_part unless @xml_part #feeling dizzy reading this...
     #extracted necessary info
-    post = @xml_part.search('//post')
+    post = @xml_part.search('//post').first #TODO think about... if it's ok to just take the first entry
     if post #FIXME handle npes (y-combinator?)
       title = post.search('regular-title').children.to_s
       body = CGI::unescapeHTML(post.search('regular-body').children[0].to_s)
       tags = Array.new
       post.search('tag').children.each {|tag| tags << tag.to_s }
-      slug = "" #TODO find out how to get the key value pairs in the xml tag!
-      date = ""
+      slug = post['slug'] 
+      date = post['date']
     end
     TotoArticle.new(title, body, date, tags, slug)
   end

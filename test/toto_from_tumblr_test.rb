@@ -5,10 +5,12 @@ $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 
 require 'test/unit'
 require 'toto_from_tumblr'
-require 'cgi'
+
 
 class TotoFromTumblrTest < Test::Unit::TestCase
   FILENAME = File.join(File.dirname(__FILE__),'tumblrExamples', '449450161.html')
+  EXPECTED_OLD_URL = "http://5v3n.com/post/449450161/new-book-about-workplace-culture-rework"
+
   def test_initialize
     converter = TotoFromTumblr.new(FILENAME)
     assert("Init failed...", converter)
@@ -30,7 +32,13 @@ class TotoFromTumblrTest < Test::Unit::TestCase
     assert("No post slug extratced! ", toto.slug)
     assert("No post title extratced! ", toto.title)
     assert("No post tag(s) extracted!", toto.tags)
-    puts toto
+  end
+  def test_extract_old_url
+    converter = TotoFromTumblr.new(FILENAME)
+    article = converter.to_toto
+    assert("No old url extracted!", article.old_url)
+    assert("Wrong old URL extracted. Expected #{EXPECTED_OLD_URL}, but was #{article.old_url}", article.old_url == EXPECTED_OLD_URL)
+    puts article.to_s
   end
 #  def test_to_file
 #    converter = TotoFromTumblr.new(FILENAME)

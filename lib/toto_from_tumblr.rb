@@ -41,8 +41,9 @@ class TotoFromTumblr
       slug = post['slug'] 
       date = post['date']
       type = post['type']
+      old_url = post['url-with-slug']
     end
-    @article = TotoArticle.new(title, body, date, tags, slug, type)
+    @article = TotoArticle.new(title, body, date, tags, slug, type, old_url)
   end
   def to_file(article_file_name=nil, article_file_path="./")
     self.to_toto

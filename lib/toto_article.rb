@@ -31,6 +31,7 @@ class TotoArticle
     toto_post << "tags: #{@tags.join(', ')}\n" if @tags && !@tags.empty?
     toto_post << "slug: #{@slug}\n" if @slug && @slug != ""
     toto_post << "old_url: #{@old_url}\n" if @old_url && @old_url != ""
+    toto_post << "new_url: #{@date.strftime("%Y/%m/%d")}/#{@slug}/"
     toto_post << "\n\n"
     toto_post << @body.to_s
   end

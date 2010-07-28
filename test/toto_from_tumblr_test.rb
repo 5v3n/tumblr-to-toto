@@ -45,10 +45,10 @@ class TotoFromTumblrTest < Test::Unit::TestCase
 #    converter.to_file
 #    flunk "add assertions!"
 #  end
-#  def test_from_dir
-#    converter = TotoFromTumblr.new(FILENAME)
-#    converter.from_dir("./test/tumblrExamples")
-#    flunk "add assertions!"
-#  end
+  def test_from_dir
+    converter = TotoFromTumblr.new(FILENAME)
+    converter.from_dir("./test/tumblrExamples")
+    flunk "add assertions!"
+  end
 
 end

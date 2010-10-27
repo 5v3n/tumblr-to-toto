@@ -47,18 +47,18 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/**/*.rb']
 end
 
-task :convert, :filename do |t, args|
+task :convert_file, :filename do |t, args|
   if args.filename
-    puts "Converting #{args.filename}..."
+    puts "Converting file #{args.filename}..."
     converter = TumblrToToto.new(args.filename)
     converter.to_file
     puts "...done."
   end
 end
 
-task :convert, :dirname do |t, args|
+task :convert_directory, :dirname do |t, args|
   if args.dirname
-  puts "Converting #{args.dirname}..."
+  puts "Converting directory #{args.dirname}..."
   converter = TumblrToToto.new()
   converter.from_dir("#{args.dirname}")
   puts "... done."

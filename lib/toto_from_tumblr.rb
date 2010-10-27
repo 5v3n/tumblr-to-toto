@@ -2,6 +2,7 @@
 # and open the template in the editor.
 require 'nokogiri'
 require 'toto_article'
+require 'time'
 
 class TotoFromTumblr
   attr_accessor :file_content, :filename, :xml_part, :article

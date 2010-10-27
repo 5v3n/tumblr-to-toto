@@ -15,10 +15,10 @@ spec = Gem::Specification.new do |s|
   s.version = '0.0.1'
   s.has_rdoc = true
   s.extra_rdoc_files = ['README', 'LICENSE']
-  s.summary = 'Your summary here'
+  s.summary = 'Convert exported Tumblr blog posts to toto blog posts.'
   s.description = s.summary
-  s.author = ''
-  s.email = ''
+  s.author = 'Sven Kraeuter'
+  s.email = 'mail@5v3n.com'
   # s.executables = ['your_executable_here']
   s.files = %w(LICENSE README Rakefile) + Dir.glob("{bin,lib,spec}/**/*")
   s.require_path = "lib"
@@ -43,3 +43,18 @@ end
 Rake::TestTask.new do |t|
   t.test_files = FileList['test/**/*.rb']
 end
+
+#Rake::ConvertTask.new do |convert|
+#  puts "Convert rake task..."
+#  p convert
+  #  def test_to_file
+#    converter = TotoFromTumblr.new(FILENAME)
+#    converter.to_file
+#    flunk "add assertions!"
+#  end
+#  def test_from_dir
+#    converter = TotoFromTumblr.new(FILENAME)
+#    converter.from_dir("./test/tumblrExamples")
+#    flunk "add assertions!"
+#  end
+#end
